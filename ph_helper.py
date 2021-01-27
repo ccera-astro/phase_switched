@@ -20,7 +20,7 @@ def update_state(state,device):
     if (sport != None and port_state != state):
         port_state = state
         sport.rts = state
-        sport.dtr = state
+        sport.dtr = 0 if state != 0 else 1
         return (state)
     
     return (None)
