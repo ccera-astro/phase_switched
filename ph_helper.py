@@ -13,11 +13,13 @@ def update_state(state,device):
     global sport
     if (sport == None):
         try:
-            sport = serial.Serial(device)
+            sport = serial.Serial(port=device,baudrate=1200,rtscts=False,
+                dsrdtr=False)
         except:
             sport = None
             pass
     if (sport != None and port_state != state):
+        sport.write("%1d" % state)
         port_state = state
         sport.rts = state
         sport.dtr = 0 if state != 0 else 1
